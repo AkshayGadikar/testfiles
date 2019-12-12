@@ -1,0 +1,1941 @@
+{
+    "info": {
+        "title": "Developer portal API",
+        "version": "0.0.1"
+    },
+    "servers": [
+        {
+            "url": "http://domain.test.com/api"
+        }
+    ],
+    "paths": {
+        "/token": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Create API Token",
+                "description": "Use this endpoint to create JWT token for various resource requests",
+                "operationId": "CreateApiToken",
+                "parameters": [
+                    {
+                        "name": "Content-Type",
+                        "in": "header",
+                        "description": "",
+                        "required": true,
+                        "style": "simple",
+                        "explode": false,
+                        "schema": {
+                            "type": "string",
+                            "example": "application/json"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreateAPITokenRequest"
+                            },
+                            "example": {
+                                "username": "user1",
+                                "password": "dummypassword"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "headers": {},
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Token"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Bad request",
+                        "headers": {},
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        }
+                    }
+                },
+                "deprecated": false,
+                "security": [
+                    {
+                        "httpBearer": []
+                    }
+                ]
+            }
+        },
+        "/portal/members": {
+            "get": {
+                "tags": [
+                    "Member"
+                ],
+                "summary": "Get Member",
+                "description": "Gets member matching the UUID",
+                "operationId": "GetMember",
+                "parameters": [
+                    {
+                        "name": "uuid",
+                        "in": "path",
+                        "description": "",
+                        "required": true,
+                        "style": "simple",
+                        "explode": false,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "headers": {},
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/MemberResponse"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Bad request",
+                        "headers": {},
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        }
+                    }
+                },
+                "deprecated": false,
+                "security": [
+                    {
+                        "httpBearer": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Member"
+                ],
+                "summary": "Disables Member",
+                "description": "Member will be disabled and no longer be able to login",
+                "operationId": "DeleteMember",
+                "parameters": [
+                    {
+                        "name": "uuid",
+                        "in": "path",
+                        "description": "",
+                        "required": true,
+                        "style": "simple",
+                        "explode": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Ok",
+                        "headers": {}
+                    },
+                    "default": {
+                        "description": "Bad request",
+                        "headers": {},
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        }
+                    }
+                },
+                "deprecated": false,
+                "security": [
+                    {
+                        "httpBearer": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Member"
+                ],
+                "summary": "Update logged in member",
+                "description": "A user can update the information related to the account",
+                "operationId": "UpdateMember",
+                "parameters": [
+                    {
+                        "name": "uuid",
+                        "in": "path",
+                        "description": "",
+                        "required": true,
+                        "style": "simple",
+                        "explode": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "Content-Type",
+                        "in": "header",
+                        "description": "",
+                        "required": true,
+                        "style": "simple",
+                        "explode": false,
+                        "schema": {
+                            "type": "string",
+                            "example": "application/json"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateMemberRequest"
+                            },
+                            "example": {
+                                "username": "user1",
+                                "email": "user1@example.com",
+                                "displayName": "user1",
+                                "uri": null,
+                                "blog": "http://google.com",
+                                "im": null,
+                                "imsvc": null,
+                                "phone": null,
+                                "company": null,
+                                "address1": null,
+                                "address2": null,
+                                "locality": null,
+                                "region": null,
+                                "postalCode": null,
+                                "countryCode": "IN",
+                                "firstName": "VISHAL",
+                                "lastName": "null"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "headers": {},
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/MemberResponse"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Bad request",
+                        "headers": {},
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        }
+                    }
+                },
+                "deprecated": false,
+                "security": [
+                    {
+                        "httpBearer": []
+                    }
+                ]
+            }
+        },
+        "/portal/uuid-members": {
+            "post": {
+                "tags": [
+                    "Member"
+                ],
+                "summary": "Create member",
+                "description": "Member Registration - A member record is created in the portal. The account is however not active until user's status is changed to active from the config manager or the user activates using the confirmation link.",
+                "operationId": "CreateMember",
+                "parameters": [
+                    {
+                        "name": "Content-Type",
+                        "in": "header",
+                        "description": "",
+                        "required": true,
+                        "style": "simple",
+                        "explode": false,
+                        "schema": {
+                            "type": "string",
+                            "example": "application/json"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreateMemberRequest"
+                            },
+                            "example": {
+                                "username": "user1",
+                                "email": "user1@com.com",
+                                "displayName": "user1",
+                                "uri": null,
+                                "blog": "http://google.com",
+                                "im": null,
+                                "imsvc": null,
+                                "phone": null,
+                                "company": null,
+                                "address1": null,
+                                "address2": null,
+                                "locality": null,
+                                "region": null,
+                                "postalCode": null,
+                                "countryCode": "IN",
+                                "prefs": null,
+                                "firstName": "User1",
+                                "lastName": "null",
+                                "password": "chAngEmEn0w"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "headers": {},
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/MemberResponse"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Bad request",
+                        "headers": {},
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        }
+                    }
+                },
+                "deprecated": false,
+                "security": []
+            }
+        },
+        "/portal/members/lost-password": {
+            "post": {
+                "tags": [
+                    "Member"
+                ],
+                "summary": "Lost Password",
+                "description": "Lost Password - A link is sent to email with link to reset password",
+                "operationId": "LostPassword",
+                "parameters": [
+                    {
+                        "name": "Content-Type",
+                        "in": "header",
+                        "description": "",
+                        "required": true,
+                        "style": "simple",
+                        "explode": false,
+                        "schema": {
+                            "type": "string",
+                            "example": "application/json"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/LostPasswordRequest"
+                            },
+                            "example": {
+                                "username": "localdevadmin",
+                                "email": "admin@tibco.com"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "204": {
+                        "description": "Ok",
+                        "headers": {}
+                    },
+                    "default": {
+                        "description": "Bad request",
+                        "headers": {},
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        }
+                    }
+                },
+                "deprecated": false,
+                "security": []
+            }
+        },
+        "/portal/members/lost-username": {
+            "post": {
+                "tags": [
+                    "Member"
+                ],
+                "summary": "Lost Username",
+                "description": "Lost Username - A mail is sent with username",
+                "operationId": "LostUsername",
+                "parameters": [
+                    {
+                        "name": "Content-Type",
+                        "in": "header",
+                        "description": "",
+                        "required": true,
+                        "style": "simple",
+                        "explode": false,
+                        "schema": {
+                            "type": "string",
+                            "example": "application/json"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/LostUsernameRequest"
+                            },
+                            "example": {
+                                "email": "admin@tibco.com"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "204": {
+                        "description": "Ok",
+                        "headers": {}
+                    },
+                    "default": {
+                        "description": "Bad request",
+                        "headers": {},
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        }
+                    }
+                },
+                "deprecated": false,
+                "security": []
+            }
+        },
+        "/portal/members/reset": {
+            "post": {
+                "tags": [
+                    "Member"
+                ],
+                "summary": "Reset Password",
+                "description": "Reset Password - A user can update password",
+                "operationId": "ResetPassword",
+                "parameters": [
+                    {
+                        "name": "uuid",
+                        "in": "path",
+                        "description": "",
+                        "required": true,
+                        "style": "simple",
+                        "explode": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "timestamp",
+                        "in": "path",
+                        "description": "",
+                        "required": true,
+                        "style": "simple",
+                        "explode": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "hash",
+                        "in": "path",
+                        "description": "",
+                        "required": true,
+                        "style": "simple",
+                        "explode": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "Content-Type",
+                        "in": "header",
+                        "description": "",
+                        "required": true,
+                        "style": "simple",
+                        "explode": false,
+                        "schema": {
+                            "type": "string",
+                            "example": "application/json"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ResetPasswordRequest"
+                            },
+                            "example": {
+                                "password": "password"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "204": {
+                        "description": "Ok",
+                        "headers": {}
+                    },
+                    "default": {
+                        "description": "Bad request",
+                        "headers": {},
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        }
+                    }
+                },
+                "deprecated": false,
+                "security": []
+            }
+        },
+        "/portal/interactivedocs": {
+            "get": {
+                "tags": [
+                    "Interactive Document"
+                ],
+                "summary": "List all interactive documents",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "List of interactive documents",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/InteractiveDocs"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/portal/captchaconfig": {
+            "get": {
+                "tags": [
+                    "Captcha"
+                ],
+                "summary": "Get the captcha configuration information",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "Captcha configuration details",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/CaptchaConfig"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/portal/uuid-interactivedocs/": {
+            "get": {
+                "tags": [
+                    "Interactive Document"
+                ],
+                "summary": "Get the interactive document specification",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id of the interactive document",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Specification associated with the interactive document represented by the id",
+                        "content": {}
+                    }
+                }
+            }
+        },
+        "/portal/applications/": {
+            "get": {
+                "tags": [
+                    "Application"
+                ],
+                "summary": "Get Application",
+                "description": "Gets a particular application based on uuid in path",
+                "parameters": [
+                    {
+                        "name": "uuid",
+                        "in": "path",
+                        "description": "Unique id of an application",
+                        "required": true,
+                        "style": "simple",
+                        "explode": false,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApplicationResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Application"
+                ],
+                "summary": "UpdatePortalApplication",
+                "description": "Edits the existing application for a logged in member",
+                "parameters": [
+                    {
+                        "name": "uuid",
+                        "in": "path",
+                        "description": "Unique id of an application",
+                        "required": true,
+                        "style": "simple",
+                        "explode": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Full entity of an application with changed values of fields that needs to be updated",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateApplicationRequest"
+                            },
+                            "example": {
+                                "uuid": "d9f9f7fd-111a-487d-bdf4-44832b01bf81",
+                                "created": "2019-05-09T21:51:39.624727-07:00",
+                                "updated": "2019-05-09T21:51:39.624727-07:00",
+                                "username": "localdevadmin",
+                                "name": "testmlappnamechange",
+                                "summary": "Test Api test1",
+                                "area_id": 711,
+                                "is_packaged": 1
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApplicationResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Application"
+                ],
+                "summary": "DeletePortalApplication",
+                "description": "Deletes a particular application from the database based on uuid in path",
+                "parameters": [
+                    {
+                        "name": "uuid",
+                        "in": "path",
+                        "description": "Unique id of an application",
+                        "required": true,
+                        "style": "simple",
+                        "explode": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "OK"
+                    },
+                    "default": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/portal/uuid-applications": {
+            "get": {
+                "tags": [
+                    "Application"
+                ],
+                "summary": "GetApplications",
+                "description": "Gets all applications of a logged in member",
+                "responses": {
+                    "200": {
+                        "description": "Success OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApplicationResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Application"
+                ],
+                "summary": "Creates an application",
+                "description": "Creates an application entry for a logged in member",
+                "parameters": [
+                    {
+                        "name": "Content-Type",
+                        "in": "header",
+                        "required": false,
+                        "style": "simple",
+                        "explode": false,
+                        "schema": {
+                            "type": "string",
+                            "example": "application/json"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Full entity of an application that needs to be created",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreateApplicationRequest"
+                            },
+                            "example": {
+                                "uuid": "d9f9f7fd-111a-487d-bdf4-44832b01bf81",
+                                "created": "2019-05-09T21:51:39.624727-07:00",
+                                "updated": "2019-05-09T21:51:39.624727-07:00",
+                                "username": "localdevadmin",
+                                "name": "testmlappnamechange",
+                                "summary": "Test Api test1",
+                                "area_id": 711,
+                                "is_packaged": 1
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApplicationResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/portal/application/registrable-apis": {
+            "get": {
+                "tags": [
+                    "Application"
+                ],
+                "summary": "GetRegistrableApplications",
+                "description": "Gets all applications of a logged in member that can be registered",
+                "responses": {
+                    "200": {
+                        "description": "Success OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/RegistrableAPIsResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/portal/applications/uuid-registrable-apis": {
+            "get": {
+                "tags": [
+                    "Application"
+                ],
+                "summary": "GetRegistrableApplicationsForAnApplication",
+                "description": "Gets all registrable applications for a particular applicaion that doesn't have a package key yet",
+                "parameters": [
+                    {
+                        "name": "uuid",
+                        "in": "path",
+                        "description": "Unique id of an application",
+                        "required": true,
+                        "style": "simple",
+                        "explode": false,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/RegistrableAPIsResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/portal/applications/register-api": {
+            "post": {
+                "tags": [
+                    "register-api"
+                ],
+                "summary": "Registers a package/plan with a package key for an application",
+                "description": "Creates a package key for selected package/plan combo for an application",
+                "parameters": [
+                    {
+                        "name": "uuid",
+                        "in": "path",
+                        "description": "Unique id of an application",
+                        "required": true,
+                        "style": "simple",
+                        "explode": false,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Package and Plan for which package key gets created",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/register-apiRequest"
+                            },
+                            "example": {
+                                "packages": [
+                                    {
+                                        "uuid": "d3f6d62f-0b3e-418c-ac60-fbabc5697b48",
+                                        "planUUID": "6afd16f3-a06a-46c1-8320-fe2ce1f729f3"
+                                    },
+                                    {
+                                        "uuid": "6fdb342c-87de-4104-bb9e-b331339aa2ec",
+                                        "planUUID": "35e3e65f-a216-4e2f-9f5c-ba2bc288ca3d"
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/register-apiResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/token/refresh": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Refreshes the TTL of token",
+                "description": "Use this endpoint to refresh ttl of token by 15 min",
+                "parameters": [],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "headers": {},
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Token"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "InteractiveDocs": {
+                "type": "array",
+                "items": {
+                    "$ref": "#/components/schemas/InteractiveDoc"
+                }
+            },
+            "InteractiveDoc": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer"
+                    },
+                    "title": {
+                        "type": "string"
+                    },
+                    "isDefault": {
+                        "type": "integer"
+                    },
+                    "documentType": {
+                        "type": "string"
+                    }
+                }
+            },
+            "CaptchaConfig": {
+                "type": "object",
+                "properties": {
+                    "enableCaptcha": {
+                        "type": "boolean"
+                    },
+                    "captchaKey": {
+                        "type": "string"
+                    }
+                }
+            },
+            "Token": {
+                "title": "Token",
+                "required": [
+                    "token"
+                ],
+                "properties": {
+                    "token": {
+                        "type": "string"
+                    }
+                }
+            },
+            "CreateAPITokenRequest": {
+                "title": "CreateAPITokenRequest",
+                "required": [
+                    "username",
+                    "password"
+                ],
+                "type": "object",
+                "properties": {
+                    "username": {
+                        "type": "string"
+                    },
+                    "password": {
+                        "type": "string"
+                    }
+                },
+                "example": {
+                    "username": "user1",
+                    "password": "admin"
+                }
+            },
+            "UpdateMemberRequest": {
+                "title": "UpdateMemberRequest",
+                "required": [
+                    "username",
+                    "email",
+                    "displayName",
+                    "status",
+                    "blog",
+                    "countryCode",
+                    "firstName",
+                    "lastName"
+                ],
+                "type": "object",
+                "properties": {
+                    "username": {
+                        "type": "string"
+                    },
+                    "email": {
+                        "type": "string"
+                    },
+                    "displayName": {
+                        "type": "string"
+                    },
+                    "uri": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "status": {
+                        "type": "string"
+                    },
+                    "blog": {
+                        "type": "string"
+                    },
+                    "im": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "imsvc": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "phone": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "company": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "address1": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "address2": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "locality": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "region": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "postalCode": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "countryCode": {
+                        "type": "string"
+                    },
+                    "firstName": {
+                        "type": "string"
+                    },
+                    "lastName": {
+                        "type": "string"
+                    }
+                },
+                "example": {
+                    "username": "user1",
+                    "email": "user1@example.com",
+                    "displayName": "user1",
+                    "uri": null,
+                    "status": "waiting",
+                    "blog": "http://google.com",
+                    "im": null,
+                    "imsvc": null,
+                    "phone": null,
+                    "company": null,
+                    "address1": null,
+                    "address2": null,
+                    "locality": null,
+                    "region": null,
+                    "postalCode": null,
+                    "countryCode": "IN",
+                    "firstName": "VISHAL",
+                    "lastName": "null"
+                }
+            },
+            "CreateMemberRequest": {
+                "title": "CreateMemberRequest",
+                "required": [
+                    "username",
+                    "email",
+                    "displayName",
+                    "blog",
+                    "countryCode",
+                    "firstName",
+                    "lastName",
+                    "password"
+                ],
+                "type": "object",
+                "properties": {
+                    "username": {
+                        "type": "string"
+                    },
+                    "email": {
+                        "type": "string"
+                    },
+                    "displayName": {
+                        "type": "string"
+                    },
+                    "uri": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "blog": {
+                        "type": "string"
+                    },
+                    "im": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "imsvc": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "phone": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "company": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "address1": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "address2": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "locality": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "region": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "postalCode": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "countryCode": {
+                        "type": "string"
+                    },
+                    "prefs": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "firstName": {
+                        "type": "string"
+                    },
+                    "lastName": {
+                        "type": "string"
+                    },
+                    "password": {
+                        "type": "string"
+                    }
+                },
+                "example": {
+                    "username": "user1",
+                    "email": "user1@com.com",
+                    "displayName": "user1",
+                    "uri": null,
+                    "blog": "http://google.com",
+                    "im": null,
+                    "imsvc": null,
+                    "phone": null,
+                    "company": null,
+                    "address1": null,
+                    "address2": null,
+                    "locality": null,
+                    "region": null,
+                    "postalCode": null,
+                    "countryCode": "IN",
+                    "prefs": null,
+                    "firstName": "User1",
+                    "lastName": "null",
+                    "password": "chAngEmEn0w"
+                }
+            },
+            "LostPasswordRequest": {
+                "title": "LostPasswordRequest",
+                "required": [
+                    "username",
+                    "email"
+                ],
+                "type": "object",
+                "properties": {
+                    "username": {
+                        "type": "string"
+                    },
+                    "email": {
+                        "type": "string"
+                    }
+                },
+                "example": {
+                    "username": "user1",
+                    "email": "user1@com.com"
+                }
+            },
+            "LostUsernameRequest": {
+                "title": "LostUsernameRequest",
+                "required": [
+                    "email"
+                ],
+                "type": "object",
+                "properties": {
+                    "email": {
+                        "type": "string"
+                    }
+                },
+                "example": {
+                    "email": "user1@com.com"
+                }
+            },
+            "ResetPasswordRequest": {
+                "title": "LostPasswordRequest",
+                "required": [
+                    "password"
+                ],
+                "type": "object",
+                "properties": {
+                    "password": {
+                        "type": "string"
+                    }
+                },
+                "example": {
+                    "password": "password"
+                }
+            },
+            "Error": {
+                "title": "Error",
+                "type": "object",
+                "properties": {
+                    "code": {
+                        "type": "string"
+                    },
+                    "message": {
+                        "type": "string"
+                    }
+                }
+            },
+            "Errors": {
+                "title": "Errors",
+                "type": "object",
+                "properties": {
+                    "fieldName": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Error"
+                        }
+                    }
+                }
+            },
+            "ErrorResponse": {
+                "title": "ErrorResponse",
+                "type": "object",
+                "required": [
+                    "code",
+                    "message"
+                ],
+                "properties": {
+                    "errors": {
+                        "$ref": "#/components/schemas/Errors"
+                    },
+                    "code": {
+                        "type": "string"
+                    },
+                    "message": {
+                        "type": "string"
+                    }
+                },
+                "example": {
+                    "errors": {
+                        "username": [
+                            {
+                                "code": "UserNameExists",
+                                "message": "Username already exists"
+                            }
+                        ]
+                    },
+                    "code": "ValidationFailed",
+                    "message": "Validation failure during Create or Update of entity"
+                }
+            },
+            "MemberResponse": {
+                "title": "MemberResponse",
+                "type": "object",
+                "properties": {
+                    "uuid": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "created": {
+                        "type": "string"
+                    },
+                    "updated": {
+                        "type": "string"
+                    },
+                    "username": {
+                        "type": "string"
+                    },
+                    "email": {
+                        "type": "string"
+                    },
+                    "displayName": {
+                        "type": "string"
+                    },
+                    "uri": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "blog": {
+                        "type": "string"
+                    },
+                    "im": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "imsvc": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "phone": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "company": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "address1": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "address2": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "locality": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "region": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "postalCode": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "countryCode": {
+                        "type": "string"
+                    },
+                    "prefs": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "firstName": {
+                        "type": "string"
+                    },
+                    "lastName": {
+                        "type": "string"
+                    },
+                    "password": {
+                        "type": "string"
+                    }
+                },
+                "example": {
+                    "uuid": "8bf33bc3-90b6-498b-853c-7b6dc345b542",
+                    "created": "2019-05-23T14:33:33+05:30",
+                    "updated": "2019-05-23T16:12:18+05:30",
+                    "username": "user1",
+                    "email": "user1@com.com",
+                    "displayName": "user1",
+                    "uri": null,
+                    "blog": "http://google.com",
+                    "im": null,
+                    "imsvc": null,
+                    "phone": null,
+                    "company": null,
+                    "address1": null,
+                    "address2": null,
+                    "locality": null,
+                    "region": null,
+                    "postalCode": null,
+                    "countryCode": "IN",
+                    "prefs": null,
+                    "firstName": "User1",
+                    "lastName": "null",
+                    "areaStatus": "active"
+                }
+            },
+            "CreateApplicationRequest": {
+                "title": "CreateApplicationRequest",
+                "required": [
+                    "username name"
+                ],
+                "type": "object",
+                "properties": {
+                    "username": {
+                        "type": "string",
+                        "example": "aksingh"
+                    },
+                    "name": {
+                        "type": "string",
+                        "example": "app1"
+                    },
+                    "summary": {
+                        "type": "string",
+                        "example": "test api"
+                    },
+                    "type": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "commercial": {
+                        "type": "integer",
+                        "nullable": true
+                    },
+                    "ads": {
+                        "type": "integer",
+                        "nullable": true
+                    },
+                    "ads_system": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "usage_model": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "tags": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "notes": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "how_did_you_hear": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "preferred_protocol": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "prefs": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "eav": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "external_id": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "uri": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "status": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "area_id": {
+                        "type": "integer"
+                    },
+                    "is_packaged": {
+                        "type": "integer",
+                        "nullable": true
+                    },
+                    "oauth_redirect_uri": {
+                        "type": "string",
+                        "nullable": true
+                    }
+                },
+                "example": {
+                    "username": "localdevadmin",
+                    "name": "testmlapp7",
+                    "summary": "Test Api",
+                    "external_id": "1",
+                    "is_packaged": 1
+                }
+            },
+            "UpdateApplicationRequest": {
+                "title": "UpdateApplicationRequest",
+                "required": [
+                    "username name"
+                ],
+                "type": "object",
+                "properties": {
+                    "username": {
+                        "type": "string",
+                        "example": "aksingh"
+                    },
+                    "name": {
+                        "type": "string",
+                        "example": "app1"
+                    },
+                    "summary": {
+                        "type": "string",
+                        "example": "test api"
+                    },
+                    "type": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "commercial": {
+                        "type": "integer",
+                        "nullable": true
+                    },
+                    "ads": {
+                        "type": "integer",
+                        "nullable": true
+                    },
+                    "ads_system": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "usage_model": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "tags": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "notes": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "how_did_you_hear": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "preferred_protocol": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "prefs": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "eav": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "external_id": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "uri": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "status": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "area_id": {
+                        "type": "integer"
+                    },
+                    "is_packaged": {
+                        "type": "integer",
+                        "nullable": true
+                    },
+                    "oauth_redirect_uri": {
+                        "type": "string",
+                        "nullable": true
+                    }
+                },
+                "example": {
+                    "username": "testuser",
+                    "name": "testmlapp8",
+                    "summary": "Test Api Name Change",
+                    "external_id": "1",
+                    "area_id": 2222,
+                    "is_packaged": 1
+                }
+            },
+            "ApplicationResponse": {
+                "title": "ApplicationResponse",
+                "type": "object",
+                "properties": {
+                    "uuid": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "created": {
+                        "type": "string",
+                        "example": "2019-05-23T13:12:17.558777-07:00"
+                    },
+                    "updated": {
+                        "type": "string",
+                        "example": "2019-05-23T13:12:17.558777-07:00"
+                    },
+                    "username": {
+                        "type": "string",
+                        "example": "localdevadmin"
+                    },
+                    "name": {
+                        "type": "string",
+                        "example": "app1"
+                    },
+                    "summary": {
+                        "type": "string",
+                        "example": "Test Api"
+                    },
+                    "type": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "commercial": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "ads": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "ads_system": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "usage_model": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "tags": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "notes": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "how_did_you_hear": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "preferred_protocol": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "preferred_output": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "prefs": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "eav": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "external_id": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "uri": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "status": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "area_id": {
+                        "type": "integer",
+                        "example": 2222
+                    },
+                    "is_packaged": {
+                        "type": "string",
+                        "nullable": true,
+                        "example": "0"
+                    },
+                    "oauth_redirect_uri": {
+                        "type": "string",
+                        "nullable": true
+                    }
+                }
+            },
+            "RegistrableAPIsResponse": {
+                "title": "RegistrableAPIsResponse",
+                "type": "object",
+                "properties": {
+                    "uuid": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "id": {
+                        "type": "integer"
+                    }
+                },
+                "example": {
+                    "id": 41538,
+                    "name": "Booking API",
+                    "uuid": "d3f6d62f-0b3e-418c-ac60-fbabc5697b48",
+                    "plans": {
+                        "id": 90078,
+                        "uuid": "6afd16f3-a06a-46c1-8320-fe2ce1f729f3",
+                        "areaId": 2222,
+                        "packageId": 41538,
+                        "name": "Partner",
+                        "description": null,
+                        "notes": null,
+                        "rateLimitCeiling": 5000,
+                        "rateLimitExempt": 0,
+                        "rateLimitOrderOverrideAllowed": 1,
+                        "rateLimitKeyOverrideAllowed": 1,
+                        "rateLimitPeriod": "day",
+                        "qpsLimitCeiling": 2,
+                        "qpsLimitExempt": 0,
+                        "qpsLimitOrderOverrideAllowed": 1,
+                        "qpsLimitKeyOverrideAllowed": 1,
+                        "orderMax": 1,
+                        "orderModerationThreshold": 4,
+                        "responseFilterOverrideAllowed": 1,
+                        "emailTemplateSetId": null,
+                        "eav": "",
+                        "created": "2019-06-10T14:42:43Z",
+                        "updated": "2019-06-10T15:50:14Z",
+                        "isPublic": 1,
+                        "isModerated": 0,
+                        "status": "active"
+                    }
+                }
+            },
+            "register-apiRequest": {
+                "title": "register-apiRequest",
+                "type": "object",
+                "example": {
+                    "packages": [
+                        {
+                            "uuid": "d3f6d62f-0b3e-418c-ac60-fbabc5697b48",
+                            "planUUID": "6afd16f3-a06a-46c1-8320-fe2ce1f729f3"
+                        },
+                        {
+                            "uuid": "6fdb342c-87de-4104-bb9e-b331339aa2ec",
+                            "planUUID": "35e3e65f-a216-4e2f-9f5c-ba2bc288ca3d"
+                        }
+                    ]
+                }
+            },
+            "register-apiResponse": {
+                "title": "register-apiResponse",
+                "type": "object",
+                "example": {
+                    "packageKeys": [
+                        {
+                            "uuid": "9b50bc50-e2b6-482e-b05e-a23ec1fbe17f",
+                            "created": "0001-01-01T00:00:00Z",
+                            "updated": "0001-01-01T00:00:00Z",
+                            "area_id": 0,
+                            "app_id": 0,
+                            "package_id": 0,
+                            "plan_id": 0,
+                            "apikey": "",
+                            "secret": null,
+                            "rate_limit_ceiling": 0,
+                            "rate_limit_exempt": false,
+                            "qps_limit_ceiling": 0,
+                            "qps_limit_exempt": false,
+                            "status": "",
+                            "username": "",
+                            "eav": null,
+                            "package": {
+                                "uuid": "d3f6d62f-0b3e-418c-ac60-fbabc5697b48"
+                            },
+                            "plan": {
+                                "id": 0,
+                                "uuid": "6afd16f3-a06a-46c1-8320-fe2ce1f729f3",
+                                "name": "",
+                                "description": null,
+                                "notes": null,
+                                "rateLimitCeiling": null,
+                                "rateLimitExempt": null,
+                                "rateLimitOrderOverrideAllowed": null,
+                                "rateLimitKeyOverrideAllowed": null,
+                                "rateLimitPeriod": null,
+                                "qpsLimitCeiling": null,
+                                "qpsLimitExempt": null,
+                                "qpsLimitOrderOverrideAllowed": null,
+                                "qpsLimitKeyOverrideAllowed": null,
+                                "orderMax": null,
+                                "orderModerationThreshold": null,
+                                "responseFilterOverrideAllowed": null,
+                                "emailTemplateSetId": null,
+                                "eav": null,
+                                "isPublic": null,
+                                "isModerated": null,
+                                "status": null
+                            }
+                        },
+                        {
+                            "uuid": "3ff775e6-ff7b-46bd-bd56-abd9921fde0d",
+                            "created": "0001-01-01T00:00:00Z",
+                            "updated": "0001-01-01T00:00:00Z",
+                            "area_id": 0,
+                            "app_id": 0,
+                            "package_id": 0,
+                            "plan_id": 0,
+                            "apikey": "",
+                            "secret": null,
+                            "rate_limit_ceiling": 0,
+                            "rate_limit_exempt": false,
+                            "qps_limit_ceiling": 0,
+                            "qps_limit_exempt": false,
+                            "status": "",
+                            "username": "",
+                            "eav": null,
+                            "package": {
+                                "uuid": "6fdb342c-87de-4104-bb9e-b331339aa2ec"
+                            },
+                            "plan": {
+                                "id": 0,
+                                "uuid": "35e3e65f-a216-4e2f-9f5c-ba2bc288ca3d",
+                                "name": "",
+                                "description": null,
+                                "notes": null,
+                                "rateLimitCeiling": null,
+                                "rateLimitExempt": null,
+                                "rateLimitOrderOverrideAllowed": null,
+                                "rateLimitKeyOverrideAllowed": null,
+                                "rateLimitPeriod": null,
+                                "qpsLimitCeiling": null,
+                                "qpsLimitExempt": null,
+                                "qpsLimitOrderOverrideAllowed": null,
+                                "qpsLimitKeyOverrideAllowed": null,
+                                "orderMax": null,
+                                "orderModerationThreshold": null,
+                                "responseFilterOverrideAllowed": null,
+                                "emailTemplateSetId": null,
+                                "eav": null,
+                                "isPublic": null,
+                                "isModerated": null,
+                                "status": null
+                            }
+                        }
+                    ]
+                }
+            }
+        },
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "scheme": "bearer",
+                "bearerFormat": "JWT"
+            }
+        }
+    },
+    "security": [
+        {
+            "bearerAuth": []
+        }
+    ],
+    "tags": [
+        {
+            "name": "Member",
+            "description": "Endpoints to interact with Member resource"
+        },
+        {
+            "name": "Auth",
+            "description": "Authentication endpoint to generate JWT token."
+        },
+        {
+            "name": "Interactive Document",
+            "description": "Endpoints to interact with Interactive documents"
+        },
+        {
+            "name": "Application",
+            "description": "Endpoints to interact with Application"
+        },
+        {
+            "name": "Captcha",
+            "description": "Endpoint for captcha"
+        }
+    ]
+}
